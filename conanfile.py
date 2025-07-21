@@ -1,5 +1,4 @@
 import os
-from conan.tools.files import copy
 from conan import ConanFile
 
 class GCCAArch64NoneEabiRecipe(ConanFile):
@@ -24,7 +23,7 @@ class GCCAArch64NoneEabiRecipe(ConanFile):
         return
     
     def package(self):
-        copy(self, pattern="*", dst=self.package_folder, src=os.path.join(self.source_folder, "gcc"))
+        self.copy("*", src="gcc", dst="")
         return
     
     def package_info(self):
