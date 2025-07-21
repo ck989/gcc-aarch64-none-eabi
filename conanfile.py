@@ -1,12 +1,13 @@
 import os
+from conan.tools.files import copy
 from conan import ConanFile
 
 class GCCAArch64NoneEabiRecipe(ConanFile):
     name = "gcc-aarch64-none-eabi"
     version = "14.2.1"
     package_type = "application"
-    settings = "os", "arch"
-    exports_sources = "gcc/*"
+    settings = "arch"
+    exports_sources = "*"
 
     def layout(self):
         self.folders.source = "."
@@ -23,7 +24,9 @@ class GCCAArch64NoneEabiRecipe(ConanFile):
         return
     
     def package(self):
-        self.copy("*", src="gcc", dst="")
+        src = os.path.join(self.build_folder, "gcc")
+        dst = self.package_folder
+        copy(self, "*", src=src, dst=dst)
         return
     
     def package_info(self):
