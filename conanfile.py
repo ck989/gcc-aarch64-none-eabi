@@ -1,9 +1,9 @@
 import os
-from pathlib import pathlib
-from conans import ConanFile
+from conan.tools.files import copy
+from conan import ConanFile
 
-class Package(ConanFile):
-    name = "gcc-arm-none-eabi"
+class GCCAArch64NoneEabiRecipe(ConanFile):
+    name = "gcc-aarch64-none-eabi"
     version = "14.2.1"
 
     def build(self):
@@ -13,10 +13,10 @@ class Package(ConanFile):
         return
     
     def package(self):
-        self.copy("*", src="gcc", dst="")
+        copy(self, pattern="*", dst=self.package_folder, src=os.path.join(self.source_folder, "gcc"))
         return
     
     def package_info(self):
-        self.env_info.path.append(os.path.join(self.package_folder, "bin"))
+        self.env_info.PATH.append(os.path.join(self.package_folder, "bin"))
         return
 
