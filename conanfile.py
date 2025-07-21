@@ -17,6 +17,6 @@ class GCCAArch64NoneEabiRecipe(ConanFile):
         return
     
     def package_info(self):
-        self.buildenv_info.append_path(os.path.join(self.package_folder, "bin"))
+        self.buildenv_info.append_path("PATH",os.path.join(self.package_folder, "bin"))
         return
 
